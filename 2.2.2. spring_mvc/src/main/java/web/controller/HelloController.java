@@ -29,7 +29,9 @@ public class HelloController {
 	@GetMapping(value = "/cars")
 	public String showCars(@RequestParam(value = "count", required = false, defaultValue = "5")
 									   Integer num, ModelMap model) {
-
+		if(num == null || num > 5) {
+			num = 5;
+		}
 		model.addAttribute("cars", carService.carsList(num));
 		return "cars";
 	}
