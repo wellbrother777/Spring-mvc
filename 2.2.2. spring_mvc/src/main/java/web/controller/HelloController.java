@@ -33,7 +33,7 @@ public class HelloController {
 	public String showCars(@RequestParam(value = "count", required = false, defaultValue = "1000")
 									   Integer num, ModelMap model) {
 
-		if(num == null || num > car.getCars().size()) {
+		if(num == null || num > 5 || num > car.getCars().size()) {
 			num = car.getCars().size();
 		}
 		model.addAttribute("cars", carService.carsList(num));
