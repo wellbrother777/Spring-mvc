@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import web.model.Car;
 import web.service.CarService;
 
 import java.util.ArrayList;
@@ -25,12 +26,15 @@ public class HelloController {
 
 	@Autowired
 	private CarService carService;
+	@Autowired
+	private Car car;
 
 	@GetMapping(value = "/cars")
-	public String showCars(@RequestParam(value = "count", required = false, defaultValue = "5")
+	public String showCars(@RequestParam(value = "count", required = false, defaultValue = "1000")
 									   Integer num, ModelMap model) {
-		if(num == null || num > 5) {
-			num = 5;
+
+		if(num == null || num > car.getCars().size()) {
+			num = car.getCars().size();
 		}
 		model.addAttribute("cars", carService.carsList(num));
 		return "cars";
